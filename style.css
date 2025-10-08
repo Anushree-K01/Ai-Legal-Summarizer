@@ -1,0 +1,91 @@
+body {
+  background-color: #f5f7fb;
+  font-family: 'Segoe UI', sans-serif;
+  color: #1a1a1a;
+  margin: 0;
+  padding: 0;
+}
+
+.hero-header {
+  background: linear-gradient(90deg, #001f3f, #002d62);
+}
+
+.hero-box {
+  background: linear-gradient(90deg, #002147, #08397d);
+  border-radius: 20px;
+  max-width: 800px;
+  color: #fff;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+  background-color: #003366;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+.btn-primary:hover {
+  background-color: #004b8d;
+}
+
+.btn-outline-light {
+  border-radius: 10px;
+}
+
+.footer {
+  background-color: #001f3f;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.navbar {
+  background-color: #001f3f !important;
+}
+
+.navbar-brand {
+  font-size: 1.25rem;
+}
+
+.nav-link {
+  color: #dcdcdc !important;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #ffffff !important;
+}
+.upload-card {
+  background: linear-gradient(90deg, #002147, #08397d);
+  border-radius: 20px;
+  color: white;
+  max-width: 700px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+}
+
+.upload-card label {
+  color: #dfe7f5;
+}
+
+.form-control, .form-select, textarea {
+  border-radius: 10px;
+}
+
+textarea::placeholder {
+  color: #b0b0b0;
+  opacity: 0.8;
+}
+
+.btn-primary {
+  background-color: #003366;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 30px;
+  font-size: 1.1rem;
+}
+
+.btn-primary:hover {
+  background-color: #004b8d;
+  transform: scale(1.03);
+  transition: 0.2s ease;
+}
