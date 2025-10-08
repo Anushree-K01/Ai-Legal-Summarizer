@@ -42,7 +42,7 @@ def dashboard():
 
 @app.route('/upload')
 def upload():
-    """Upload page (function name corrected to 'upload')"""
+    """Upload page"""
     return render_template('upload.html')
 
 
@@ -56,7 +56,6 @@ def summarize():
         summary_type = request.form.get('summary_type', 'short')
         language = request.form.get('language', 'English')
 
-        # Validate that we have some content to summarize
         if not file and not text_input:
             return render_template('result.html', summary="⚠️ Please upload a file or enter some text.")
 
@@ -68,7 +67,6 @@ def summarize():
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(filepath)
 
-            # Extract text based on file type using functions from utils.py
             if filename.lower().endswith('.txt'):
                 with open(filepath, 'r', encoding='utf-8') as f:
                     content = f.read()
@@ -83,33 +81,59 @@ def summarize():
         else:
             content = text_input
 
-        # Check if content extraction was successful
         if not content.strip():
             return render_template('result.html', summary="❌ Error: Could not extract any text from the document or the text area was empty.")
 
-        # --- GENERATE SUMMARY ---
-        summary_style = "a simple, easy-to-understand summary suitable for a citizen"
-        if summary_type == 'detailed':
-            summary_style = "a detailed, legally precise summary suitable for a lawyer, including key arguments, precedents, and legal reasoning"
+        model = genai.GenerativeModel("gemini-2.0-flash-exp")
 
-        prompt = (
-            f"You are an expert legal analyst. Please summarize the following legal document. "
-            f"Create {summary_style}. "
-            f"The response must be in {language}.\n\n"
+        # Step 1: Classify the document
+        classification_prompt = (
+            "Analyze the following text and determine if it is a 'Legal Document' or a 'General Document'. "
+            "Respond with only the words 'Legal Document' or 'General Document'.\n\n"
+            f"--- Document Content ---\n{content}"
+        )
+        classification_response = model.generate_content(classification_prompt)
+        document_type = classification_response.parts[0].text.strip()
+
+        # Step 2: Create a context-aware prompt for the summary.
+        if summary_type == 'detailed':
+            summary_style = (
+                "a detailed, legally precise summary suitable for a lawyer. Use markdown bolding (e.g., **text**) to highlight key legal terms, party names, and crucial dates. "
+                "If the document pertains to India, ensure all legal interpretations use the Indian legal framework. "
+                "After the main summary paragraph, create a section for key highlights with 3-4 bullet points covering the core legal arguments and the final ruling. "
+                "Finally, create a separate section for key legal sections and constitutional articles identified. For each one, provide its number and a brief explanation of how it applies to this particular case."
+            )
+        else: # This is for the 'short' citizen summary
+             summary_style = (
+                "a simple, easy-to-understand summary paragraph suitable for a citizen. Use markdown bolding (e.g., **text**) to highlight the main parties involved and the final outcome. "
+                "After the main summary paragraph, create a section for key takeaways and list 2-3 of the most important points as bullet points."
+             )
+
+        if "Legal Document" in document_type:
+            context_instruction = (
+                "You are an expert legal analyst. The following is a legal document. "
+                f"Create {summary_style}."
+            )
+        else: # Assumes General Document
+            context_instruction = (
+                "You are a helpful assistant. The following is a general-purpose document. "
+                f"Create {summary_style}."
+            )
+
+        summarization_prompt = (
+            f"{context_instruction} "
+            "Do not provide a separate list of general term definitions. "
+            f"CRITICAL INSTRUCTION: Your entire response, including all headings, titles, and content, must be written exclusively in the following language: {language}. "
+            "Do not use any English unless it is a proper noun (like a name) from the original document.\n\n"
             f"--- Document Content ---\n{content}"
         )
 
-        # Generate summary using the stable 'gemini-pro' model
-        model = genai.GenerativeModel("gemini-2.0-flash-exp")
-
-        response = model.generate_content(prompt)
-        
-        summary = response.text if hasattr(response, "text") else "Could not generate a summary."
+        summary_response = model.generate_content(summarization_prompt)
+        summary = summary_response.text
 
         return render_template('result.html', summary=summary)
 
     except Exception as e:
-        # Provide a more user-friendly error message
         return render_template('result.html', summary=f"❌ An unexpected error occurred: {str(e)}")
 
 
