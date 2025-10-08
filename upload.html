@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upload Legal Document | LegalAI Labs</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+  <a class="navbar-brand fw-bold" href="/">LegalAI Labs</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+      <li class="nav-item"><a class="nav-link active" href="{{ url_for('upload') }}">Upload Document</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Header -->
+<header class="hero-header text-white text-center py-5">
+  <h1 class="fw-bold">Upload or Paste Your Legal Document</h1>
+  <p class="lead fst-italic">Our AI will generate clear summaries for both lawyers and citizens.</p>
+</header>
+
+<!-- Upload Form Section -->
+<section class="container my-5">
+  <div class="upload-card mx-auto p-5">
+    <form method="POST" action="/summarize" enctype="multipart/form-data">
+      <!-- File upload -->
+      <div class="mb-3 text-start">
+        <label class="form-label fw-semibold">Upload PDF or DOCX file:</label>
+        <input type="file" class="form-control" name="file">
+      </div>
+
+      <!-- Summary Type -->
+      <div class="mb-3 text-start">
+        <label class="form-label fw-semibold">Choose summary type:</label>
+        <select class="form-select" name="summary_type">
+          <option value="short">Short Summary (Citizen)</option>
+          <option value="detailed">Detailed Summary (Lawyer)</option>
+        </select>
+      </div>
+
+      <!-- Language -->
+      <div class="mb-3 text-start">
+        <label class="form-label fw-semibold">Select language:</label>
+        <select class="form-select" name="language">
+          <option value="english">English</option>
+          <option value="hindi">Hindi</option>
+          <option value="Spanish">Spanish</option>
+          <option value="French">French</option>
+          <option value="German">German</option>
+          <option value="Kannada">Kannada (ಕನ್ನಡ)</option>
+          <option value="Tamil">Tamil (தமிழ்)</option>
+          <option value="Marathi">Marathi (मराठी)</option>
+        </select>
+      </div>
+
+      <!-- Text area -->
+      <div class="mb-3 text-start">
+        <label class="form-label fw-semibold">Or paste your text:</label>
+        <textarea class="form-control" name="text" rows="5" placeholder="Paste your legal text here..."></textarea>
+      </div>
+
+      <!-- Submit -->
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary btn-lg mt-3">Summarize</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer text-center py-3 mt-5">
+  © 2025 LegalAI Labs | Empowering Legal Understanding with AI
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

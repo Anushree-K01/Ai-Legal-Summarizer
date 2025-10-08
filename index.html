@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI-Driven Judicial Document Summarizer</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+  <a class="navbar-brand fw-bold" href="/">LegalAI Labs</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{ url_for('upload') }}">Upload Document</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero Header -->
+<header class="hero-header text-white text-center py-5">
+  <h1 class="fw-bold">AI-Driven Judicial Document Summarizer</h1>
+  <p class="lead fst-italic">Turning complex legal language into simple understanding.</p>
+</header>
+
+<!-- Main Section -->
+<section class="container text-center mt-5">
+  <div class="hero-box p-5 mx-auto">
+    <h4 class="mb-3 text-light">AI Legal Illustration</h4>
+    <p class="text-light">
+      Court judgments are long and complex. Our AI tool summarizes and explains them clearly — 
+      saving time for lawyers and helping citizens understand their rights.
+    </p>
+    <div class="mt-4">
+      <a href="{{ url_for('upload') }}" class="btn btn-primary btn-lg mx-2">Upload Document</a>
+      <a href="#" class="btn btn-outline-light btn-lg mx-2">Try Demo</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer text-center py-3 mt-5">
+  © 2025 LegalAI Labs | Empowering Legal Understanding with AI
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

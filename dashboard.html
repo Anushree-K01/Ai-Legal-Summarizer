@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>Your Dashboard</h1>
+  </header>
+
+  <main class="dashboard">
+    <input type="search" placeholder="Search similar judgments..." />
+
+    <div class="stats">
+      <p>📄 Files uploaded: 5</p>
+      <p>⏱️ Time saved: 6 hours</p>
+      <p>✂️ Words reduced: 12,000+</p>
+    </div>
+
+    <ul class="history-list">
+      <li>Case_1.pdf - Summarized</li>
+      <li>Judgment_B.docx - Summarized</li>
+      <li>Order_345.pdf - Summarized</li>
+    </ul>
+
+    <a href="{{ url_for('upload') }}" class="btn">Upload New Document</a>
+  </main>
+
+  <footer>
+    <p>© 2025 LegalAI Labs | Smarter Justice Analytics</p>
+  </footer>
+</body>
+</html>

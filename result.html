@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Summary Result | LegalAI Labs</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f5f7fb;
+      font-family: "Segoe UI", sans-serif;
+    }
+    .result-section {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      margin: 50px auto;
+      max-width: 900px;
+      box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #002147;
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+    pre {
+      background-color: #f0f5ff;
+      border-left: 6px solid #002147;
+      border-radius: 10px;
+      padding: 20px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-size: 1rem;
+    }
+    footer {
+      background-color: #002147;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      border-radius: 8px 8px 0 0;
+      margin-top: 40px;
+    }
+    .btn-custom {
+      background-color: #002147;
+      color: white;
+      border-radius: 10px;
+      margin: 10px 5px;
+      text-decoration: none;
+      padding: 10px 20px;
+      display: inline-block;
+    }
+    .btn-custom:hover {
+      background-color: #013c74;
+    }
+  </style>
+</head>
+<body>
+
+<div class="result-section">
+  <h2>📘 Summary for Legal Document</h2>
+  <pre>{{ summary | safe }}</pre>
+  <div class="text-center">
+    <a href="{{ url_for('upload') }}" class="btn-custom">⬅ Back to Upload</a>
+  </div>
+</div>
+
+<footer>
+  © 2025 LegalAI Labs | Empowering Legal Understanding with AI
+</footer>
+
+</body>
+</html>
